@@ -1,31 +1,27 @@
-import { StyleSheet } from 'react-native';
+import { useMemo, useState } from "react";
+import { Link, Stack } from "expo-router";
+import { View, SafeAreaView } from "react-native";
+import ExploreHeader from "@/components/ExploreHeader";
+import Listings from "@/components/Listings";
+import listingsData from "@/assets/data/airbnb-listings.json";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+const Home = () => {
+  const [category, setCategory] = useState("Tiny Homes");
+  const items = useMemo(() => listingsData as any, []);
 
-export default function TabOneScreen() {
+  const onDataChanged = (category: string) => {
+    setCategory(category);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
-  );
-}
+    <SafeAreaView className="flex-1">
+      <View className="h-[15%]">
+        <ExploreHeader onCategoryChanged={onDataChanged} />
+      </View>
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+      <Listings listings={items} category={category} />
+    </SafeAreaView>
+  );
+};
+
+export default Home;
