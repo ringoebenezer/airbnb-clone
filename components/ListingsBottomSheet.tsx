@@ -29,7 +29,7 @@ const ListingsBottomSheet = ({ listings, category }: Props) => {
       handleIndicatorStyle={{ backgroundColor: Colors.grey }}
       style={styles.sheetContainer}>
       <View style={styles.contentContainer}>
-        <Listings listings={listings} refresh={refresh} category={category} />
+        <Listings listings={listings} category={category} />
         <View style={styles.absoluteView}>
           <TouchableOpacity onPress={onShowMap} style={styles.btn}>
             <Text style={{ fontFamily: "mon-sb", color: "#fff" }}>Map</Text>
